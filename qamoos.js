@@ -8,56 +8,81 @@ document.addEventListener('keydown', (events) => {
     }
     else {
         if (events.key === "Enter" && `${keys}` === `${generatedNameArr}`) {
-            alert('حريييييييييف حرووووووووف')
-            y = 'a'
+            for (let iiii = 1; iiii < 6; iiii++){
+                idAllGreen = document.getElementById(y + iiii);
+                Object.assign(idAllGreen.style,{backgroundColor:"green"});
+            };
+            y = 'a';
+            console.log("i:" + i)
+            alert('حريييييييييف حرووووووووف');
         }
-        else if (events.key === "Enter" && i !== 6 ) {
-            alert("لازم خمس حروف يانجم");
-            console.log(i);
-        }
+        // else 
         else {
             console.log(events.type);
             console.log(events.key);
             const key = events.key;
             if (key === "Enter") {
-                const shiftLetter = function (text) {
-                    let s = text.split('');
-                    for (let r = 0; r < s.length; r++) {
-                        switch (s[r]) {
-                            case ' ':
-                                break;
-                            default:
-                                s[r] = String.fromCharCode(s[0].charCodeAt(0) + 1);
-                        }
+                if (events.key === "Enter" && i !== 6) {
+                    alert("لازم خمس حروف يانجم");
+                    console.log("i:" + i);
+                }
+                else {
+                    for (let h = 0; h < keys.length; h++) {
+                        for (let j = 0; j < generatedNameArr.length; j++) {
+                            let matchL = keys[h] === generatedNameArr[j];
+                            if (matchL == true) {
+                                let iii = h + 1;
+                                idOrange = document.getElementById(y + iii);
+                                Object.assign(idOrange.style, { backgroundColor: "orange" });
+                            }
+                        };
+                        let matchLP = keys[h] === generatedNameArr[h];
+                        if (matchLP == true) {
+                            let ii = h + 1;
+                            idGreen = document.getElementById(y + ii);
+                            Object.assign(idGreen.style, { backgroundColor: "green" });
+                        };
+                    };
+                    const shiftLetter = function (text) {
+                        let s = text.split('');
+                        for (let r = 0; r < s.length; r++) {
+                            switch (s[r]) {
+                                case ' ':
+                                    break;
+                                default:
+                                    s[r] = String.fromCharCode(s[0].charCodeAt(0) + 1);
+                            }
+                        };
+                        return s.join('');
                     }
-                    return s.join('');
+                    console.log(shiftLetter(y));
+                    switch (y) {
+                        case "g":
+                            break;
+                        default:
+                            y = `${shiftLetter(y)}`;
+                    };
+                    console.log(`${keys}`);
+                    console.log(`${generatedNameArr}`);
+                    console.log("y:" + y);
+                    i = 1;
+                    keys = []
                 }
-                console.log(shiftLetter(y));
-                switch (y) {
-                    case "g":
-                        break;
-                    default:
-                        y = `${shiftLetter(y)}`;
-                }
-                console.log(`${keys}`);
-                console.log(`${generatedNameArr}`);
-                console.log("y:"+y);
-                i = 1;
-                keys = []
             }
             else if (key === "Backspace") {
-                uu = i - 1;
-                document.getElementById(y + uu).innerHTML = "";
-                i = i - 1;
-                keys.pop()
-            }
-            else {
-                document.getElementById(y + i).innerHTML = events.key;
-                keys.push(events.key);
-                i++;
-            }
-        }
-    }
+                    uu = i - 1;
+                    document.getElementById(y + uu).innerHTML = "";
+                    i = i - 1;
+                    keys.pop()
+                }
+                else {
+                    document.getElementById(y + i).innerHTML = events.key;
+                    keys.push(events.key);
+                    i++;
+                };
+            
+        };
+    };
 });
 
 
@@ -86,6 +111,9 @@ for (let n = 0; n < generatedName.length; n++) {
     
 }
 console.log(generatedNameArr)
+
+
+
 
 function getKey(e) {
     var location = e.location;
