@@ -1,6 +1,7 @@
 
 let y = 'a';
 i = 1;
+let v;
 keys = [];
 document.addEventListener('keydown', (events) => {
     if (events.key === "Shift" || events.key === "Alt" || events.key === "ArrowUp" || events.key === "ArrowDown" || events.key === "ArrowRight" || events.key === "ArrowLeft") {
@@ -27,21 +28,38 @@ document.addEventListener('keydown', (events) => {
                     console.log("i:" + i);
                 }
                 else {
+                    v = [];
                     for (let h = 0; h < keys.length; h++) {
-                        for (let j = 0; j < generatedNameArr.length; j++) {
-                            let matchL = keys[h] === generatedNameArr[j];
-                            if (matchL == true) {
-                                let iii = h + 1;
-                                idOrange = document.getElementById(y + iii);
-                                Object.assign(idOrange.style, { backgroundColor: "orange" });
-                            }
-                        };
+                        
                         let matchLP = keys[h] === generatedNameArr[h];
                         if (matchLP == true) {
                             let ii = h + 1;
                             idGreen = document.getElementById(y + ii);
                             Object.assign(idGreen.style, { backgroundColor: "green" });
-                        };
+                            v.push(h);
+                            console.log(v)
+                        }
+                        // for (let j = -1; j < 6; matchLP == true ? j+=2 : j++) {
+                        //     let matchL = keys[h] === generatedNameArr[j];
+                        //     if (matchL == true) {
+                        //         let iii = h + 1;
+                        //         idOrange = document.getElementById(y + iii);
+                        //         Object.assign(idOrange.style, { backgroundColor: "orange" });
+                        //     }
+                        // };
+                    };
+                    for (let l = 0; l < 5; l++) {
+                        for (let j = 0; j < 5; j++) {
+                            let jInV = v.includes(j);
+                            if (jInV == false) {
+                                let matchL = keys[l] === generatedNameArr[j];
+                                if (matchL == true) {
+                                    let iii = l + 1;
+                                    idOrange = document.getElementById(y + iii);
+                                    Object.assign(idOrange.style, { backgroundColor: "orange" });
+                                }
+                            }
+                        }
                     };
                     const shiftLetter = function (text) {
                         let s = text.split('');
@@ -54,7 +72,7 @@ document.addEventListener('keydown', (events) => {
                             }
                         };
                         return s.join('');
-                    }
+                    };
                     console.log(shiftLetter(y));
                     switch (y) {
                         case "g":
@@ -66,20 +84,21 @@ document.addEventListener('keydown', (events) => {
                     console.log(`${generatedNameArr}`);
                     console.log("y:" + y);
                     i = 1;
-                    keys = []
+                    keys = [];
                 }
             }
             else if (key === "Backspace") {
-                    uu = i - 1;
-                    document.getElementById(y + uu).innerHTML = "";
-                    i = i - 1;
-                    keys.pop()
-                }
-                else {
-                    document.getElementById(y + i).innerHTML = events.key;
-                    keys.push(events.key);
-                    i++;
-                };
+                uu = i - 1;
+                document.getElementById(y + uu).innerHTML = "";
+                i = i - 1;
+                keys.pop()
+            }
+            else {
+                document.getElementById(y + i).innerHTML = events.key;
+                keys.push(events.key);
+                i++;
+                console.log(keys)
+            };
             
         };
     };
@@ -110,7 +129,7 @@ for (let n = 0; n < generatedName.length; n++) {
     generatedNameArr.push(generatedName[n])
     
 }
-console.log(generatedNameArr)
+// console.log(generatedNameArr)
 
 
 
