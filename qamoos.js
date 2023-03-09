@@ -1,14 +1,28 @@
 
 let y = 'a';
+let x = y;
 i = 1;
 let v;
 keys = [];
+initialBorder = document.getElementById(x + i);
+if (initialBorder) {
+    Object.assign(initialBorder.style, { border: "1px solid #eee" });
+};
 document.addEventListener('keydown', (events) => {
+    noBorderAfterEnter = document.getElementById(x + 5);
+    if (i == 1 && noBorderAfterEnter) {
+        Object.assign(noBorderAfterEnter.style, { border: "0px solid black" });
+    }
     if (events.key === "Shift" || events.key === "Alt" || events.key === "ArrowUp" || events.key === "ArrowDown" || events.key === "ArrowRight" || events.key === "ArrowLeft") {
         console.log("unValidKey")
     }
+    
     else {
         if (events.key === "Enter" && `${keys}` === `${generatedNameArr}`) {
+            noBorderAfterAllGreen = document.getElementById(y + 5);
+            if (noBorderAfterAllGreen) {
+                Object.assign(noBorderAfterAllGreen.style, { border: "0px solid black" });
+            }
             for (let iiii = 1; iiii < 6; iiii++){
                 idAllGreen = document.getElementById(y + iiii);
                 Object.assign(idAllGreen.style,{backgroundColor:"green"});
@@ -23,12 +37,32 @@ document.addEventListener('keydown', (events) => {
             console.log(events.key);
             const key = events.key;
             if (key === "Enter") {
-                if (events.key === "Enter" && i !== 6) {
+                console.log(`i:${i}`)
+                if (i < 6) {
                     alert("لازم خمس حروف يانجم");
                     console.log("i:" + i);
                 }
                 else {
+                    for (let k = 0; k < 5;k++){
+                        idInitialGrey = document.getElementById(y + (k+1));
+                        if (idInitialGrey) {
+                            Object.assign(idInitialGrey.style, { backgroundColor: "grey" });
+                        }
+                    };
                     v = [];
+                    for (let l = 0; l < 5; l++) {
+                        for (let j = 0; j < 5; j++) {
+                            let jInV = v.includes(j);
+                            if (jInV == false) {
+                                let matchL = keys[l] === generatedNameArr[j];
+                                if (matchL == true) {
+                                    let iii = l + 1;
+                                    idOrange = document.getElementById(y + iii);
+                                    Object.assign(idOrange.style, { backgroundColor: "orange" });
+                                }
+                            }
+                        }
+                    };
                     for (let h = 0; h < keys.length; h++) {
                         
                         let matchLP = keys[h] === generatedNameArr[h];
@@ -48,19 +82,7 @@ document.addEventListener('keydown', (events) => {
                         //     }
                         // };
                     };
-                    for (let l = 0; l < 5; l++) {
-                        for (let j = 0; j < 5; j++) {
-                            let jInV = v.includes(j);
-                            if (jInV == false) {
-                                let matchL = keys[l] === generatedNameArr[j];
-                                if (matchL == true) {
-                                    let iii = l + 1;
-                                    idOrange = document.getElementById(y + iii);
-                                    Object.assign(idOrange.style, { backgroundColor: "orange" });
-                                }
-                            }
-                        }
-                    };
+                    x = y;
                     const shiftLetter = function (text) {
                         let s = text.split('');
                         for (let r = 0; r < s.length; r++) {
@@ -80,8 +102,8 @@ document.addEventListener('keydown', (events) => {
                         default:
                             y = `${shiftLetter(y)}`;
                     };
-                    console.log(`${keys}`);
-                    console.log(`${generatedNameArr}`);
+                    // console.log(`${keys}`);
+                    // console.log(`${generatedNameArr}`);
                     console.log("y:" + y);
                     i = 1;
                     keys = [];
@@ -91,11 +113,25 @@ document.addEventListener('keydown', (events) => {
                 uu = i - 1;
                 document.getElementById(y + uu).innerHTML = "";
                 i = i - 1;
-                keys.pop()
+                keys.pop();
+                idNoBorder = document.getElementById(y + uu);
+                if (idNoBorder) {
+                    Object.assign(idNoBorder.style, { border: "0" });
+                }
             }
             else {
+                idBorder = document.getElementById(y + i);
+                if (idBorder) {
+                Object.assign(idBorder.style, { border: "1px solid #eee" });
+                };
+                u = i - 1;
+                idNoBorder = document.getElementById(y + u);
+                if (idNoBorder) {
+                Object.assign(idNoBorder.style, { border: "0" });
+                };
                 document.getElementById(y + i).innerHTML = events.key;
                 keys.push(events.key);
+                
                 i++;
                 console.log(keys)
             };
@@ -116,14 +152,14 @@ document.addEventListener('keydown', (events) => {
 // })
 
 
-let names = ["اسبوع", "ثلاثة", "نهاية", "ميناء", "اضافة", "تغيير", "مصنوع", "عقوبة", "منخفض", "منعطف", "متوسط", "ارسال", "اثنين", "مدرسة", "مزرعة", "منشار", "صحافة", "حقيقة", "قاعدة", "تاكيد", "صندوق", "مذكرة", "قيادة", "غرامة", "مدينة", "حرارة", "طائرة", "مشترك", "جزيرة", "اقامة", "مشكلة", "منطقة", "سفينة", "ارقام", "اغنية", "مباشر", "احساس", "قائمة", "رعاية", "سيارة", "رسالة", "علامة", "سهولة", "اطفال", "سهولة", "موضوع", "بساطة", "خريطة", "اشعار", "تمثيل", "منطقة", "مسالة", "دائرة", "اسقاط", "غابات", "نافذة", "مليون", "تجارة", "تكلفة", "تناسب", "سيطرة", "بحيرة", "طريقة", "فستان", "سحابة", "تصميم", "برمجة", "معادن", "تجربة", "نتيجة", "قانون", "عبارة", "معركة", "طبيعة", "عاصمة", "عملية", "حماية", "تزويد"];
+let names = ["مسرور","مشهور","محبوب","مثقوب","اسبوع", "ثلاثة", "نهاية", "ميناء", "اضافة", "تغيير", "مصنوع", "عقوبة", "منخفض", "منعطف", "متوسط", "ارسال", "اثنين", "مدرسة", "مزرعة", "منشار", "صحافة", "حقيقة", "قاعدة", "تاكيد", "صندوق", "مذكرة", "قيادة", "غرامة", "مدينة", "حرارة", "طائرة", "مشترك", "جزيرة", "اقامة", "مشكلة", "منطقة", "سفينة", "ارقام", "اغنية", "مباشر", "احساس", "قائمة", "رعاية", "سيارة", "رسالة", "علامة", "سهولة", "اطفال", "سهولة", "موضوع", "بساطة", "خريطة", "اشعار", "تمثيل", "منطقة", "مسالة", "دائرة", "اسقاط", "غابات", "نافذة", "مليون", "تجارة", "تكلفة", "تناسب", "سيطرة", "بحيرة", "طريقة", "فستان", "سحابة", "تصميم", "برمجة", "معادن", "تجربة", "نتيجة", "قانون", "عبارة", "معركة", "طبيعة", "عاصمة", "عملية", "حماية", "تزويد"];
 let rondomNumber = Math.random();
 let namesLenght = names.length;
 rondomNumber = namesLenght * rondomNumber;
 rondomNumber = Math.floor(rondomNumber);
 let generatedName = names[rondomNumber];
 console.log(rondomNumber)
-console.log(generatedName);
+// console.log(generatedName);
 let generatedNameArr = [];
 for (let n = 0; n < generatedName.length; n++) {
     generatedNameArr.push(generatedName[n])
